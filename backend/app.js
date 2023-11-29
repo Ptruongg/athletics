@@ -1,5 +1,3 @@
-
-//packages
 const express = require('express');
 require('express-async-errors');
 const morgan = require('morgan');
@@ -9,10 +7,12 @@ const helmet = require('helmet');
 const cookieParser = require('cookie-parser');
 const { environment } = require('./config');
 const isProduction = environment === 'production';
-const routes = require('./routes')
-//init express app
 const app = express();
-app.use(morgan('dev'));
+const routes = require('./routes');
+const { requireAuth } = require('./utils/auth');
+
+app.use(morgan("dev"));
+
 app.use(express.json());
 app.use(cookieParser());
 
